@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.sec.news.admin.biz.Impl" />
+	
+	
+	<!--使用properity文件-->
+    <context:property-placeholder location="classpath:db.properties" system-properties-mode="NEVER"/>
+    
+
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>${jdbc.driver}</value>
+        </property>
+        <property name="url">
+            <value>${jdbc.url}</value>
+
+        </property>
+        <property name="username">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+    </bean> 
+    
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.sec.news.model" />
+        <property name="dataSource" ref="dataSource"/>
+        
+   		<!-- 
+   			自动扫描com/how2java/mapper/目录下的所有SQL映射的xml文件, 省掉Category.xml里的手工配置
+        	value="classpath:com/how2java/mapper/*.xml"指的是classpath(类路径)下com.how2java.mapper包中的所有xml文件
+        	Category.xml位于com.how2java.mapper包下，这样*.xml就可以被自动扫描
+         -->
+        <property name="mapperLocations" value="classpath:com/sec/news/dao/*.xml"/>
+    </bean>
+
+    <bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.sec.news.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSession" />
+    </bean>
+
+<!--   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="dataSource" />-->
+<!--   </bean>-->
+
+<!--     <tx:advice id="txadvice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" />-->
+<!--            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>-->
+<!--            <tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception" />-->
+<!--            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>-->
+<!--            <tx:method name="list*" propagation="REQUIRED" rollback-for="Exception"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="serviceMethod" expression="execution(* com.sec.news.admin.biz.Impl.*.*(..))"/>-->
+<!--        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txadvice"/>-->
+<!--    </aop:config>-->
+</beans>

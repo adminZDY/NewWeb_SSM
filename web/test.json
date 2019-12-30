@@ -1,0 +1,165 @@
+{
+  "nextPageNo": 2,
+  "lastPageNo": 2,
+  "page": [
+    {
+      "typeName": "学院新闻",
+      "remark": "关于学院内部的新闻",
+      "typeId": 1
+    },
+    {
+      "typeName": "行业新闻",
+      "remark": "关于IT行业的新闻",
+      "typeId": 2
+    },
+    {
+      "typeName": "就业新闻",
+      "remark": "关于学院学员的新闻",
+      "typeId": 3
+    },
+    {
+      "typeName": "其他新闻",
+      "remark": "与学员有关的其他新闻",
+      "typeId": 4
+    },
+    {
+      "typeName": "学员生活",
+      "remark": "发布学员在学习生活的相关新闻",
+      "typeId": 5
+    },
+    {
+      "typeName": "学院",
+      "remark": "关于学院内部的新闻",
+      "typeId": 6
+    },
+    {
+      "typeName": "行业",
+      "remark": "关于IT行业的新闻",
+      "typeId": 7
+    },
+    {
+      "typeName": "就业",
+      "remark": "关于学院学员的新闻",
+      "typeId": 8
+    },
+    {
+      "typeName": "其他",
+      "remark": "与学员有关的其他新闻",
+      "typeId": 9
+    },
+    {
+      "typeName": "生活",
+      "remark": "发布学员在学习生活的相关新闻",
+      "typeId": 10
+    },
+    {
+      "typeName": "新闻",
+      "remark": "关于学院内部的新闻",
+      "typeId": 11
+    },
+    {
+      "typeName": "行",
+      "remark": "关于IT行业的新闻",
+      "typeId": 12
+    },
+    {
+      "typeName": "就",
+      "remark": "关于学院学员的新闻",
+      "typeId": 13
+    },
+    {
+      "typeName": "其",
+      "remark": "与学员有关的其他新闻",
+      "typeId": 14
+    },
+    {
+      "typeName": "学",
+      "remark": "发布学员在学习生活的相关新闻",
+      "typeId": 15
+    }
+  ],
+  "indexPageNo": 1,
+  "pageNo": 1,
+  "countData": 16,
+  "pageSize": 15,
+  "totalpages": 2,
+  "data": [
+    {
+      "typeName": "学院新闻",
+      "remark": "关于学院内部的新闻",
+      "typeId": 1
+    },
+    {
+      "typeName": "行业新闻",
+      "remark": "关于IT行业的新闻",
+      "typeId": 2
+    },
+    {
+      "typeName": "就业新闻",
+      "remark": "关于学院学员的新闻",
+      "typeId": 3
+    },
+    {
+      "typeName": "其他新闻",
+      "remark": "与学员有关的其他新闻",
+      "typeId": 4
+    },
+    {
+      "typeName": "学员生活",
+      "remark": "发布学员在学习生活的相关新闻",
+      "typeId": 5
+    },
+    {
+      "typeName": "学院",
+      "remark": "关于学院内部的新闻",
+      "typeId": 6
+    },
+    {
+      "typeName": "行业",
+      "remark": "关于IT行业的新闻",
+      "typeId": 7
+    },
+    {
+      "typeName": "就业",
+      "remark": "关于学院学员的新闻",
+      "typeId": 8
+    },
+    {
+      "typeName": "其他",
+      "remark": "与学员有关的其他新闻",
+      "typeId": 9
+    },
+    {
+      "typeName": "生活",
+      "remark": "发布学员在学习生活的相关新闻",
+      "typeId": 10
+    },
+    {
+      "typeName": "新闻",
+      "remark": "关于学院内部的新闻",
+      "typeId": 11
+    },
+    {
+      "typeName": "行",
+      "remark": "关于IT行业的新闻",
+      "typeId": 12
+    },
+    {
+      "typeName": "就",
+      "remark": "关于学院学员的新闻",
+      "typeId": 13
+    },
+    {
+      "typeName": "其",
+      "remark": "与学员有关的其他新闻",
+      "typeId": 14
+    },
+    {
+      "typeName": "学",
+      "remark": "发布学员在学习生活的相关新闻",
+      "typeId": 15
+    }
+  ],
+  "totalRecords": 16,
+  "previousPageNo": 1
+}

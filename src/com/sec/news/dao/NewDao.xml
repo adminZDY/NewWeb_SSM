@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sec.news.dao.NewDao">
+
+    <resultMap type="News" id="NewsBean">
+        <id column="newsId" property="newsId" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="recommended" property="recommended" />
+        <result column="click" property="click" />
+        <result column="keywords" property="keywords" />
+        <result column="releaseTime" property="releaseTime" />
+
+        <!-- 多对一的关系 -->
+        <!-- property: 指的是属性名称, javaType：指的是属性的类型 -->
+        <association property="type" javaType="Type">
+            <id column="typeId" property="typeId"/>
+            <result column="typeName" property="typeName"/>
+            <result column="remark" property="remark"/>
+        </association>
+        <association property="user" javaType="User">
+            <id column="userId" property="userId"/>
+            <result column="userName" property="userName"/>
+            <result column="password" property="password"/>
+        </association>
+    </resultMap>
+
+    <select id="selectNewByPage" resultMap="NewsBean"  parameterType="PageModel">
+--         select top ${pageSize} n.newsId 'newsId' , n.title 'title' ,n.content 'content', n.recommended 'recommended' ,n.click 'click', n.releaseTime 'releaseTime',n.keywords 'keywords',
+--         u.userId 'userId' , u.userName 'userName' , u.password 'upassword' ,
+--         t.typeId 'typeId' , t.typeName 'typeName' , t.remark 'remark'
+--         from newsInfo n left join userInfo u on n.userId = u.userId left join
+--         newsTypeInfo t on n.typeId = t.typeId  where n.newsId  not in (select top (${pageSize}*(${pageNo}-1))
+--         n.newsId from newsInfo n order by n.newsId desc)order by n.newsId desc
+            select n.newsId 'newsId' , n.title 'title' ,n.content 'content', n.recommended 'recommended' ,n.click 'click', n.releaseTime 'releaseTime',n.keywords 'keywords',
+            u.userId 'userId' , u.userName 'userName' , u.password 'upassword' ,
+            t.typeId 'typeId' , t.typeName 'typeName' , t.remark 'remark'
+            from newsInfo n left join userInfo u on n.userId = u.userId left join
+            newsTypeInfo t on n.typeId = t.typeId order by n.newsId desc limit ${pageNo} , ${pageSize}
+    </select>
+
+    <insert id="insertNews" parameterType="News"  >
+            insert into newsInfo(typeId,userId,title,content,recommended,keywords) 
+            values (#{type.typeId},#{uuser.userId},#{title},#{content},#{recommended},#{keywords})
+    </insert>
+
+    <delete id="deleteNews" parameterType="News"  >
+            delete from newsInfo where newsId = #{nwesId}
+    </delete>
+
+    <delete id="deleteNewByArray">
+           delete from newsInfo where newsId in
+            <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </delete>
+
+    <!-- 根据新闻类型查询新闻分页 -->
+    <select id="selectNewsIdByPage"  resultMap="NewsBean">
+           select n.newsId 'newsId' , n.title 'title' ,n.content 'content', n.recommended 'recommended' ,n.click 'click', n.releaseTime 'releaseTime',n.keywords 'keywords',
+            u.userId 'userId' , u.userName 'userName' , u.password 'upassword'
+            from newsInfo n left join userinfo u  on n.userId = u.userId
+            where n.typeId = #{typeId} order by n.newsId desc limit ${pm.pageNo} , ${pm.pageSize}
+    </select>
+
+    <select id="selectByNewsId" resultMap="NewsBean" parameterType="_int">
+        select n.newsId 'newsId' , n.title 'title' ,n.content 'content', n.recommended 'recommended' ,n.click 'click', n.releaseTime 'releaseTime',n.keywords 'keywords',
+        u.userId 'userId' , u.userName 'userName' , u.password 'upassword'
+        from newsinfo n left join userinfo u on n.userId = u.userId where n.newsId = #{newsId}
+    </select>
+
+    <update id="updateNews" parameterType="News" >
+            update newsInfo set title=#{title},typeId=#{type.typeId},content=#{content},keywords=#{keywords},recommended=#{recommended}
+            where newsId = #{newsId}
+    </update>
+
+    <select id="selectNewsCount"  resultType="_int" parameterType="_int">
+           select count(*) as 'num' from newsInfo
+        <where>
+            <if test=" typeId != 0">
+                 typeId = #{typeId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

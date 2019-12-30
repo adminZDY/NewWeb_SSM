@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sec.news.dao.TypeDao">
+
+    <insert id="insertNewsType" parameterType="Type"  >
+            insert into newsTypeInfo(typeName,remark)  values(#{typeName},#{remark})
+    </insert>
+
+    <delete id="deleteNewsType" parameterType="_int"  >
+            delete from newsTypeInfo where typeId = #{typeId}
+    </delete>
+
+    <select id="existsNewsType"  parameterType="Type" resultType="_int">
+        select count(*) from newsTypeInfo where typeName = #{typeName}
+        <where>
+                <if test="typeId != 0">
+                    and typeId != #{typeId}
+                </if>
+        </where>
+    </select>
+
+    <update id="updateNewsType" parameterType="Type" >
+           update newsTypeInfo set typeName = #{typeName} ,remark = #{remark} where typeId = #{typeId}
+    </update>
+
+    <select id="selectNewsType" resultType="Type">
+           select * from newsTypeInfo
+    </select>
+
+    <select id="selectNewsTypeById" parameterType="_int" resultType="Type">
+           select * from newsTypeInfo where typeId = #{typeId}
+    </select>
+
+    <select id="typeNumCount" resultType="_int">
+            select count(*) as 'num' from newsTypeInfo
+    </select>
+
+    <select id="selectNewsTypePage" resultType="Type" parameterType="PageModel">
+        select  * from newsTypeInfo limit ${pageNo} , ${pageSize}
+    </select>
+
+</mapper>
